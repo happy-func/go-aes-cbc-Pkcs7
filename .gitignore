@@ -1,0 +1,10 @@
+# dependencies
+node_modules/
+
+# file
+.Ds_Store
+package-lock.json
+
+# ide
+.idea/
+.vscode/
