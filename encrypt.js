@@ -1,31 +1,31 @@
-const CryptoJS = require('crypto-js');  //引用AES源码js
+const {AES, enc, mode, pad} = require('crypto-js');  //引用AES源码js
 
 const key = "go-encrypt-tests";  //十六位十六进制数作为密钥
 const iv = '1234567890qwerty';   //十六位十六进制数作为密钥偏移量
 
 function parse(str) {
-    return CryptoJS.enc.Utf8.parse(str);
+    return enc.Utf8.parse(str);
 }
 
 //解密方法
 function Decrypt(code, secret_key, iv) {
-    return CryptoJS.AES.decrypt(code, parse(secret_key),{
+    return AES.decrypt(code, parse(secret_key), {
         iv: parse(iv),
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7
-    }).toString(CryptoJS.enc.Utf8);
+        mode: mode.CBC,
+        padding: pad.Pkcs7
+    }).toString(enc.Utf8);
 }
 
 //加密方法
 function Encrypt(data, secret_key, iv) {
-    return CryptoJS.AES.encrypt(parse(data), parse(secret_key), {
+    return AES.encrypt(parse(data), parse(secret_key), {
         iv: parse(iv),
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7
+        mode: mode.CBC,
+        padding: pad.Pkcs7
     }).toString();
 }
 
-const obj = {a:132,b:"hello world",ab:2,uuid:"1qaz-2wsx-3edc-4rfv"}
+const obj = {a: 132, b: "hello world", ab: 2, uuid: "1qaz-2wsx-3edc-4rfv"}
 const encryptData = Encrypt(JSON.stringify(obj), key, iv);
 console.log(`加密后的内容：${encryptData}`)
 
