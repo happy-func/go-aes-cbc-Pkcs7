@@ -7,15 +7,15 @@
     </head>
     <body>
         <script>
-            function genRandomString() {
-                function s4() {
-                    const num = Math.random();
-                    return !Number.isInteger(num) ? num.toString(36).slice(-4) : s4();
-                }
+            function s4() {
+                const num = Math.random();
+                return !Number.isInteger(num) ? num.toString(36).slice(-4) : s4();
+            }
+            function s16() {
                 return s4() + s4() + s4() + s4()
             }
-            const key = genRandomString();
-            const iv = genRandomString();
+            const key = s16();
+            const iv = s16();
 
             function parse(str) {
                 return CryptoJS.enc.Utf8.parse(str);
